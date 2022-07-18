@@ -1,26 +1,31 @@
 <div class="container mt-5">
-    <div class="card" style="padding: 20px;">
-            <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <h3 class="mb-30">Se connecter</h3>
+            <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="mt-10">
+                <div class="mt-10">
 
             <input type="text"
             ngModel
             name="userName"
             id="userName"
-            placeholder="Enter your username"
-            class="form-control mb-3"
+            placeholder="Username"
+            class="single-input"
             >
+            </div>
+            <div class="mt-10">
 
             <input type="password"
             ngModel
             name="userPassword"
             id="userPassword"
-            placeholder="Enter your password"
-            class="form-control mb-3"
+            placeholder="Password"
+            class="single-input"
             >
+            </div>
+            <div class="mt-10">
 
             <input type="submit"
             value="Login"
-            class="btn btn-outline-primary form-control rounded-0">
+            class="form-control rounded-0 button button-contactForm boxed-btn">
+            </div>
         </form>
-    </div>
 </div>
