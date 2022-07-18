@@ -23,15 +23,33 @@ export class LoginComponent implements OnInit {
     this.userService.login(loginForm.value).subscribe(
       (response: any)=> {
         console.log(response)
-      this.userAuthService.setToken(response.jwtToken)
-      this.userAuthService.setRole(response.user.role)
-      const role =response.user.role[0].roleName;
-        role === "Admin" ? this.router.navigate(['/admin']):this.router.navigate(['/user']) 
-    },
+
+          if(!response.user.disabled)
+          {
+            this.userAuthService.setToken(response.jwtToken)
+            this.userAuthService.setRole(response.user.role)
+            this.userAuthService.setUserName(response.user.userName)
+            this.userService.loggedIn(response.user.userName).subscribe( (r:any )=> {
+              console.log("am i logged in ",r)
+          }  ,
+          (error)=> {
+            console.log("res",error)
+          })
+            const role =response.user.role[0].roleName;
+              role === "Admin" ? this.router.navigate(['/admin']):this.router.navigate(['/user']) 
+          }
+          else {
+            alert("votre demande n'a pas encore été traitée")
+          }
+    }
+  ,
       (error)=> {
         console.log("res",error)
+        alert("login ou mot de passe incorrect")
+
       }
     )
+
       }
     
 

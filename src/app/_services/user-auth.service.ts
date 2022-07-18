@@ -19,6 +19,13 @@ export class UserAuthService {
   public getToken() :string {
     return localStorage.getItem("token")
   }
+  public setUserName(username:string)  {
+     localStorage.setItem("username",username);
+  }
+  public getUsername() :string {
+    return localStorage.getItem("username")
+  }
+
   public clear () {
     localStorage.clear()
   }

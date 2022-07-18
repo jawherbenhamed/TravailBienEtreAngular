@@ -7,16 +7,24 @@
                 <th>userName</th>
                 <th>LastName</th>
                 <th>FirstName</th>
+                <th>statut</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody >
-                <tr *ngFor="let item of usersList | keyvalue">
-                    <td>{{item.key}}</td>
-                    <td>{{item.value.userName}}</td>
-                    <td>{{item.value.userLastName}}</td>
-                    <td>{{item.value.userFirstName}}</td>
-                    <td><button class="form-control rounded-0 button button-contactForm boxed-btn" (click)="onClickDelete(item.value.userName)">Supprimer</button></td>
+                <tr *ngFor="let item of usersList$ | async; let i = index">
+                    <td>{{i}}</td>
+                    <td>{{item.userName | titlecase}}</td>
+                    <td>{{item.userLastName | titlecase}}</td>
+                    <td>{{item.userFirstName | titlecase}}</td>
+                    <td>{{item.disabled ? "En Attente": "Membre"  | titlecase}}</td>
+
+                    <td class="">
+                        <button *ngIf="item.disabled" class="btn btn-outline-success" (click)="acceptUser(item.userName)">Approuver</button>
+                        <button *ngIf="item.disabled" class="btn btn-outline-danger" (click)="onClickDelete(item.userName)">Décliner</button>
+
+                        <button *ngIf="!item.disabled" class="btn btn-outline-danger" (click)="onClickDelete(item.userName)">Supprimer</button>
+                    </td>
 
                 </tr>
         </tbody>

@@ -1,6 +1,49 @@
 <div class="container mt-5">
-    <div class="card text-center" style="padding: 20px; color: red;">
-        <h1>You are User</h1>
-        <h1>{{message}}</h1>
+<h2>Profil</h2>
+    <div class="card " *ngIf="user!=null">
+        <div class="card-header text-center">
+            <img *ngIf="photo!=''"  [src]="photo" height="100" width="auto"/>
+
+        </div>
+        <div class="card-body" >
+
+            <div class="row">
+                <label>Username</label>
+            <input class="text-center" type="text" [value]="user.userName" disabled/>
+            </div>
+            <div class="row">
+
+            <label>Nom</label>
+            <input class="text-center" type="text" (ngModelChange)="onChangeLastName($event)"    [ngModel]="lastName"/>
+            </div>
+            <div class="row">
+
+            <label>Prénom</label>
+            <input class="text-center" type="text"(ngModelChange)="onChangeFirstName($event)"  [ngModel]="firstName"
+            />
+            </div>
+            <div class="row">
+
+            <label>Email</label>
+            <input class="text-center" type="text"(ngModelChange)="onChangeEmail($event)"  [ngModel]="email"
+            />
+            </div>
+            <div class="row">
+
+                <label>Phone</label>
+                <input class="text-center" type="text"(ngModelChange)="onChangePhone($event)"  [ngModel]="phone"
+                />
+                </div>
+                <div class="row">
+
+                    <label>Photo</label>
+                    <input class="text-center" type="text"(ngModelChange)="onChangePhoto($event)"  [ngModel]="photo"
+                    />
+                    </div>
+            <div class="mt-4 pull-right">
+                <button class="btn btn-outline-success" (click)="onclick()">update</button>
+                </div>
+            
+        </div>
     </div>
 </div>

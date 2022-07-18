@@ -18,6 +18,12 @@ public isLoggedIn() {
   return this.userAuthService.isLoggedIn()
 }
 public logOut() {
+  this.userService.logOut(this.userAuthService.getUsername()).subscribe( (r:any )=> {
+    console.log("am i logged in ",r)
+}  ,
+(error)=> {
+  console.log("res",error)
+})
   this.userAuthService.clear()
   this.router.navigate(["/home"])
 }

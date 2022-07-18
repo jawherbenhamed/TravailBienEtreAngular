@@ -15,9 +15,15 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/user"
-          *ngIf="userService.roleMatch(['Admin'])"
+          *ngIf="userService.roleMatch(['User'])"
 
-          >User</a>
+          >Profil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/chat"
+          *ngIf="userService.roleMatch(['User'])"
+
+          >Chat</a>
         </li>
       </ul>
       <div >

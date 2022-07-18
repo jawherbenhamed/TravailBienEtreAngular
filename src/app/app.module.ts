@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +15,7 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     LoginComponent,
     HeaderComponent,
     ForbiddenComponent,
-    SignUpComponent
+    SignUpComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
       useClass:AuthInterceptor,
       multi:true
     },
-    UserService
+    UserService,
   ],
   bootstrap: [AppComponent]
 })

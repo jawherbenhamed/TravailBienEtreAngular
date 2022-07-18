@@ -20,7 +20,12 @@ export class UserService {
   public signUp(loginData) {
     return this.httpclient.post(this.PATH_OF_API + '/registerNewUser',loginData,{headers : this.requestHeader})
   }
-
+  public loggedIn(username:string) {
+    return this.httpclient.get(this.PATH_OF_API + '/login/'+username,{headers : this.requestHeader})
+  }
+  public logOut(username:string) {
+    return this.httpclient.get(this.PATH_OF_API + '/logout/'+username,{headers : this.requestHeader})
+  }
   public forUser() {
     return this.httpclient.get(this.PATH_OF_API + '/forUser', {
       responseType: 'text',
@@ -42,12 +47,17 @@ export class UserService {
 
   }
   public getUserInfo(){
-    return this.httpclient.get(this.PATH_OF_API + '/users')
+    return this.httpclient.get(this.PATH_OF_API + '/userInfo')
 
   }
   public deleteUser(userName:string){
     return this.httpclient.delete(this.PATH_OF_API + '/users/'+userName)
-
+  }
+  public getMyMessages(channel:string){
+    return this.httpclient.get(this.PATH_OF_API + '/messages/'+channel)
+  }
+  public approuvUser(user:any){
+    return this.httpclient.get(this.PATH_OF_API + '/user/approuve/'+user);
   }
   public roleMatch(allowedRoles):boolean{
     let isMatch = false;
