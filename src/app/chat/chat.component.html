@@ -33,8 +33,10 @@
 <div class="chat-container">
 
 	<ul class="chat">
-		<li [ngClass]="chatMessage.sender === user ? 'message left' : 'message right'" *ngFor="let chatMessage of webSocketService.chatMessages">
+		<li [ngClass]="chatMessage.sender === user ? 'message left' : 'message right'" *ngFor="let chatMessage of webSocketService.chatMessages ">
 			<img class="logo" [src]="chatMessage.photo" alt="">
+            <p>{{chatMessage.sender}}</p>
+
 			<p>{{chatMessage.content}}</p>
 		</li>
 

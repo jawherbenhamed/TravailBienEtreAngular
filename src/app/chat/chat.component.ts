@@ -37,7 +37,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
       
     );
-    
+      
     sendForm.controls.message.reset();
   }
 }
