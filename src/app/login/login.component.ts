@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   login(loginForm:NgForm){
     console.log("user form",loginForm.value);
     this.userService.login(loginForm.value).subscribe(
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
             this.userAuthService.setToken(response.jwtToken)
             this.userAuthService.setRole(response.user.role)
             this.userAuthService.setUserName(response.user.userName)
+            localStorage.setItem('user',JSON.stringify(response.user))
             this.userService.loggedIn(response.user.userName).subscribe( (r:any )=> {
               console.log("am i logged in ",r)
           }  ,
@@ -53,7 +56,9 @@ export class LoginComponent implements OnInit {
       }
     
 
-
+      redirectToForgetPasword(){
+        this.router.navigate(['/forgetPassword'])
+      }
 
   
 }

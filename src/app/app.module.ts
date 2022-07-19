@@ -16,6 +16,9 @@ import { AuthInterceptor } from './_auth/auth.interceptor';
 import { UserService } from './_services/user.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ChatComponent } from './chat/chat.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { ChatComponent } from './chat/chat.component';
     HeaderComponent,
     ForbiddenComponent,
     SignUpComponent,
-    ChatComponent
+    ChatComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,

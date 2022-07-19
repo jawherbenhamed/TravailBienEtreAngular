@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChatMessageDto } from '../models/chatMessageDto';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +8,27 @@ import { ChatMessageDto } from '../models/chatMessageDto';
 export class WebSocketService  {
 
   webSocket: WebSocket;
-  chatMessages: ChatMessageDto[] = [];
+  chatMessages: any;
 
-  constructor() { }
+  constructor(private userService:UserService ) { 
+  }
+  getMessages(){
+    this.userService.getMyMessages('travail').subscribe(
+      (response) => {
+        this.chatMessages=response;
+      }, 
+      (error)=>{
+        console.log(error);
+      }
+    );
+  }
 
   public openWebSocket(){
     this.webSocket = new WebSocket('ws://localhost:8080/travail/chat');
-
+    this.getMessages()
     this.webSocket.onopen = (event) => {
       console.log('Open: ', event);
+      
     };
 
     this.webSocket.onmessage = (event) => {

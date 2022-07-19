@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ChatMessageDto } from '../models/chatMessageDto';
 import { UserAuthService } from './user-auth.service';
 
 @Injectable({
@@ -26,6 +27,7 @@ export class UserService {
   public logOut(username:string) {
     return this.httpclient.get(this.PATH_OF_API + '/logout/'+username,{headers : this.requestHeader})
   }
+
   public forUser() {
     return this.httpclient.get(this.PATH_OF_API + '/forUser', {
       responseType: 'text',
@@ -56,8 +58,17 @@ export class UserService {
   public getMyMessages(channel:string){
     return this.httpclient.get(this.PATH_OF_API + '/messages/'+channel)
   }
+  public sendMessage(chatMessageDto:ChatMessageDto){
+    return this.httpclient.post(this.PATH_OF_API+'/messages/add',chatMessageDto)
+  }
   public approuvUser(user:any){
     return this.httpclient.get(this.PATH_OF_API + '/user/approuve/'+user);
+  }
+  public forgetPassword(username:any){
+    return this.httpclient.get(this.PATH_OF_API + '/forgetPassword/'+username,{headers : this.requestHeader});
+  }
+  public changePassword(oldPassword:any,newPassword:any){
+    return this.httpclient.get(this.PATH_OF_API + '/changePassword/'+this.userAuthService.getUsername()+"/"+oldPassword+"/"+newPassword);
   }
   public roleMatch(allowedRoles):boolean{
     let isMatch = false;

@@ -1,9 +1,11 @@
 export class ChatMessageDto {
-    user: string;
-    message: string;
+    sender: string;
+    content: string;
+    photo:string
 
-    constructor(user: string, message: string){
-        this.user = user;
-        this.message = message;
+    constructor(sender: string, content: string,photo){
+        this.sender = sender;
+        this.content = content;
+        this.photo= photo;
     }
 }

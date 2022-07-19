@@ -32,4 +32,6 @@ export class UserAuthService {
   public isLoggedIn(){
     return this.getRoles() && this.getToken();
   }
+
+  
 }
