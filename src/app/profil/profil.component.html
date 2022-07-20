@@ -21,7 +21,7 @@
                                 {{firstName +" "+ lastName}}
                             </h5>
                             <h6>
-                                Web Developer and Designer
+                               {{profession}}
                             </h6>
                             <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -102,7 +102,9 @@
                                         <label>Profession</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Web Developer and Designer</p>
+                                        <p *ngIf="!editing">{{profession}}</p>
+                                        <input *ngIf="editing" type="text" name="profession" [(ngModel)]="profession">
+
                                     </div>
                                 </div>
                     </div>

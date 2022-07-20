@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -9,15 +10,20 @@ import { UserService } from '../_services/user.service';
 })
 export class ForgetPasswordComponent implements OnInit {
   mailsent=false
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,private router:Router) { }
   onClickForgetPassword(loginForm:NgForm){
 
-    //to do
+    this.mailsent=true
+    setTimeout(() => {
+      this.mailsent=false
+    }, 3000);  
     this.userService.forgetPassword(loginForm.value.userName).subscribe( (r:any )=> {
-      alert("un email a été envoyé")
+
   }  ,
   (error)=> {
-    alert(error)  })
+
+
+    this.router.navigate(["/login"])   })
   }
   ngOnInit(): void {
 

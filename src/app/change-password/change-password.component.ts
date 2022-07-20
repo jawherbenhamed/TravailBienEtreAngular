@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserAuthService } from '../_services/user-auth.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -8,10 +10,20 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-
-  constructor(private userService:UserService) { }
+  notif = false
+  constructor(private userService:UserService,private userAuthService:UserAuthService,private router:Router) { }
 
   ngOnInit(): void {
+  }
+  public logOut() {
+    this.userService.logOut(this.userAuthService.getUsername()).subscribe( (r:any )=> {
+      console.log("am i logged in ",r)
+  }  ,
+  (error)=> {
+    console.log("res",error)
+  })
+    this.userAuthService.clear()
+    this.router.navigate(["/login"])
   }
   onClickChangePassword(loginForm:NgForm){
     
@@ -19,11 +31,24 @@ export class ChangePasswordComponent implements OnInit {
 
       this.userService.changePassword(loginForm.value.oldPassword,loginForm.value.newPassword).subscribe(
         (response: any)=> {
-          console.log("changed ?",response)
+          if (response ===false)
+          {
+            this.notif=true
+            setTimeout(() => {
+              this.notif=false
+            }, 3000);  
+          }
+          else {
+          this.logOut()
+
+          }
         },
   
         (error)=> {
-          console.log("res",error)
+          this.notif=true
+          setTimeout(() => {
+            this.notif=false
+          }, 3000);         
         } ) 
   
       

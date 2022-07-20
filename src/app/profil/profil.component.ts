@@ -35,7 +35,7 @@ export class ProfilComponent implements OnInit {
          this.email=this.user.email
          this.phone=this.user.phone
          this.photo=this.imagepath+ this.user.photo
-         
+         this.profession=this.user.profession
        }, 
        (error)=>{
          console.log(error);
@@ -75,6 +75,7 @@ export class ProfilComponent implements OnInit {
       "phone":this.phone,
       "email":this.email,
       "photo":this.photo,
+      "profession":this.profession,
       "disabled":this.user.disabled}).subscribe(
       (response) => {
         this.onImageUpload();
@@ -83,7 +84,7 @@ export class ProfilComponent implements OnInit {
         console.log(response)
         setTimeout(() => {
           this.notif=false
-        }, 3000);      
+        }, 5000);      
       }, 
       (error)=>{
         console.log(error);
