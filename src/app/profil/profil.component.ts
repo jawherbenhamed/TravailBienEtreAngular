@@ -20,6 +20,7 @@ export class ProfilComponent implements OnInit {
   public file:any;
   editing = false;
   notif = false;
+  imgup=false;
  
  
    constructor(private userService: UserService,private router:Router) { }
@@ -49,6 +50,7 @@ export class ProfilComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
         this.file=file;
+        this.imgup=true;
     }
   } 
     // on form submit function
@@ -78,7 +80,9 @@ export class ProfilComponent implements OnInit {
       "profession":this.profession,
       "disabled":this.user.disabled}).subscribe(
       (response) => {
-        this.onImageUpload();
+        if (this.imgup){
+          this.onImageUpload();
+        }
         this.editing = false;
         this.notif=true
         console.log(response)
