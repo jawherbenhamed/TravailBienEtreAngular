@@ -70,6 +70,9 @@ export class UserService {
   public changePassword(oldPassword:any,newPassword:any){
     return this.httpclient.get(this.PATH_OF_API + '/changePassword/'+this.userAuthService.getUsername()+"/"+oldPassword+"/"+newPassword);
   }
+  public uploadPhoto(file:FormData){
+    return this.httpclient.post(this.PATH_OF_API + '/user/update/photo/'+this.userAuthService.getUsername(),file)
+  }
   public roleMatch(allowedRoles):boolean{
     let isMatch = false;
     let userRoles:any = this.userAuthService.getRoles();

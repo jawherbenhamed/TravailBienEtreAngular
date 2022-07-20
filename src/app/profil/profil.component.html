@@ -1,14 +1,17 @@
 <div class="profil" *ngIf="user">
 
 <div class="container emp-profile">
+    <div class="alert alert-success" role="alert" *ngIf="notif">
+        Profile updated successfully
+      </div>
     <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                    <img [src]="imagepath+photo" alt=""/>
                     <div class="file btn btn-lg btn-primary">
                         Change Photo
-                        <input type="file" name="file"/>
+                        <input type="file" name="file" (change)="onFileChange($event)"/>
                     </div>
                 </div>
             </div>
@@ -32,7 +35,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" (click)='onEdit()' *ngIf="!editing"/>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save Profile" (click)='onSave()' *ngIf="editing"/>
             </div>
         </div>
         <div class="row">
@@ -55,7 +59,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>User Id</label>
+                                        <label>Username</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p>{{userName}}</p>
@@ -66,7 +70,11 @@
                                         <label>Name</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{firstName +" "+ lastName}}</p>
+                                        <p *ngIf="!editing">{{firstName +" "+ lastName}}</p>
+                                        <div *ngIf="editing" class="inputs" #inputs>
+                                            <input type="text" name="firstName" [(ngModel)]="firstName">
+                                            <input type="text" name="lastName" [(ngModel)]="lastName">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -74,7 +82,9 @@
                                         <label>Email</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{email}}</p>
+                                        <p *ngIf="!editing">{{email}}</p>
+                                        <input *ngIf="editing" type="text" name="email" [(ngModel)]="email">
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -82,7 +92,9 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>(+216) {{phone}}
+                                        <p *ngIf="!editing">(+216) {{phone}}</p>
+                                        <input *ngIf="editing" type="text" name="phone" [(ngModel)]="phone">
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -138,7 +150,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label>Your Bio</label><br/>
-                                <p>Your detail description</p>
+                                <p (click)="changePass()" >You want to change your password ?</p>
                             </div>
                         </div>
                     </div>

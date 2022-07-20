@@ -40,7 +40,8 @@ import { ProfilComponent } from './profil/profil.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+
   ],
   providers: [
     AuthGuard,

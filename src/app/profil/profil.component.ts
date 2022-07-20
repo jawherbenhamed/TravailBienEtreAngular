@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -7,17 +8,21 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./profil.component.css']
 })
 export class ProfilComponent implements OnInit {
-
+  public imagepath = '../../assets/downloadFile/'
   public user:any=null
   public firstName:string;
   public lastName:string
   public phone:string
   public email:string
   public photo:string
- public userName:string
+  public userName:string
+  public profession:string
+  public file:any;
+  editing = false;
+  notif = false;
  
  
-   constructor(private userService: UserService) { }
+   constructor(private userService: UserService,private router:Router) { }
    
    ngOnInit(): void {
      this.userService.getUserInfo().subscribe(
@@ -29,11 +34,61 @@ export class ProfilComponent implements OnInit {
          this.lastName=this.user.userLastName
          this.email=this.user.email
          this.phone=this.user.phone
-         this.photo=this.user.photo
+         this.photo=this.imagepath+ this.user.photo
+         
        }, 
        (error)=>{
          console.log(error);
        }
      );
- }
+  }
+  changePass(){
+    this.router.navigate(["/changePassword"])
+  }
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+        this.file=file;
+    }
+  } 
+    // on form submit function
+    onImageUpload() {
+      const formData = new FormData();
+      formData.append('file', this.file);
+
+  
+      this.userService.uploadPhoto( formData)
+        .subscribe(res => {
+          localStorage.setItem("photo",this.photo)
+          console.log('Uploaded Successfully.');
+        })
+    }
+  onEdit(){
+    this.editing = true;
+  }
+
+  onSave(){
+    this.userService.uodateUser({
+      "userName":this.userName,
+      "userFirstName":this.firstName,
+      "userLastName":this.lastName,
+      "phone":this.phone,
+      "email":this.email,
+      "photo":this.photo,
+      "disabled":this.user.disabled}).subscribe(
+      (response) => {
+        this.onImageUpload();
+        this.editing = false;
+        this.notif=true
+        console.log(response)
+        setTimeout(() => {
+          this.notif=false
+        }, 3000);      
+      }, 
+      (error)=>{
+        console.log(error);
+      });
+  }
+
+
 }

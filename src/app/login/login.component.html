@@ -1,6 +1,12 @@
 <div class="container mt-5">
     <h3 class="mb-30">Se connecter</h3>
             <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="mt-10">
+                <div *ngIf="notisuccess" class="alert alert-warning" role="alert">
+                    votre demande n'a pas encore été traitée
+                  </div>
+                  <div *ngIf="notiferror" class="alert alert-danger" role="alert">
+                        login or password incorrect!
+                </div>
                 <div class="mt-10">
 
             <input type="text"

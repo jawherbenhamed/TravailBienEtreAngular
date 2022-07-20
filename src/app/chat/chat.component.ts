@@ -13,9 +13,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(public webSocketService: WebSocketService,private userService:UserService ) { }
   user;
   photo;
+  public imagepath = '../../assets/downloadFile/'
+
   ngOnInit(): void {
     this.user=localStorage.getItem("username");
-    this.photo=JSON.parse(localStorage.getItem("user")).photo
+    this.photo=localStorage.getItem("photo")
     this.webSocketService.openWebSocket();
   }
 

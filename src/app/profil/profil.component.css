@@ -93,3 +93,11 @@
     font-weight: 600;
     color: #0062cc;
 }
+
+.inputs{
+    display: flex;
+}
+.inputs input:first-child{
+    margin-right: 20px;
+}
+

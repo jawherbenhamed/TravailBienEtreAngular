@@ -11,6 +11,8 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+   notiferror=false
+   notisuccess=false
 
   constructor(private userService:UserService ,
      private userAuthService:UserAuthService,
@@ -28,6 +30,7 @@ export class LoginComponent implements OnInit {
 
           if(!response.user.disabled)
           {
+
             this.userAuthService.setToken(response.jwtToken)
             this.userAuthService.setRole(response.user.role)
             this.userAuthService.setUserName(response.user.userName)
@@ -37,18 +40,27 @@ export class LoginComponent implements OnInit {
           }  ,
           (error)=> {
             console.log("res",error)
+        
           })
             const role =response.user.role[0].roleName;
               role === "Admin" ? this.router.navigate(['/admin']):this.router.navigate(['/user']) 
           }
           else {
-            alert("votre demande n'a pas encore été traitée")
+            this.notisuccess=true
+            setTimeout(() => {
+              this.notisuccess=false
+            }, 5000);  
           }
     }
   ,
       (error)=> {
         console.log("res",error)
-        alert("login ou mot de passe incorrect")
+        this.notiferror=true
+        console.log("notif error",this.notiferror)
+
+        setTimeout(() => {
+          this.notiferror=false
+        }, 3000);   
 
       }
     )
