@@ -29,6 +29,7 @@
                         <button *ngIf="item.disabled" class="btn btn-outline-success" (click)="acceptUser(item.userName)">Approuver</button>
                         <button *ngIf="item.disabled" class="btn btn-outline-danger" (click)="onClickDelete(item.userName)">Décliner</button>
                         <button *ngIf="!item.disabled" class="btn btn-outline-danger" (click)="onClickDelete(item.userName)">Supprimer</button>
+                        <!-- <button *ngIf="!item.disabled" class="btn btn-outline-danger" (click)="onClickDesactiver(item.userName)">Désactiver</button> -->
                     </td>
 
                 </tr>

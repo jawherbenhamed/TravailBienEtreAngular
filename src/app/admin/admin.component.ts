@@ -29,6 +29,9 @@ export class AdminComponent implements OnInit {
       } ) 
 
   }
+  onClickDesactiver (userName:string):void {
+    console.log("clicked")
+  }
    onClickDelete(userName:string):void 
     {
       this.userService.deleteUser(userName).subscribe(

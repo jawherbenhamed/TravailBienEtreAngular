@@ -15,6 +15,12 @@ export class SignUpComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    //check if connected + role
+    const roles =JSON.parse(localStorage.getItem('roles'))
+    if (roles[0]?.roleName==='User')
+    this.router.navigate(['/home'])
+    else if (roles[0]?.roleName==='Admin')
+    this.router.navigate(['/admin'])
   }
   public r:string ="";
   public signUp(loginForm:NgForm){
