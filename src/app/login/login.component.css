@@ -1,0 +1,17 @@
+.forget-pass-signup span{
+    color: #051441;
+    font-size: 16px;
+    user-select: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+.forget-pass-signup{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forget-pass-signup span:hover{
+    color: #ff2143;
+}

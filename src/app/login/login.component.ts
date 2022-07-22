@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../_services/user-auth.service';
@@ -10,9 +10,11 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-   notiferror=false
-   notisuccess=false
+  
+  notiferror=false
+  notisuccess=false
 
+   
   constructor(private userService:UserService ,
      private userAuthService:UserAuthService,
      private router:Router
@@ -21,11 +23,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
         //check if connected + role
         const roles =JSON.parse(localStorage.getItem('roles'))
-        if (roles[0]?.roleName==='User')
-        this.router.navigate(['/home'])
-        else if (roles[0]?.roleName==='Admin')
-        this.router.navigate(['/admin'])
-
+        
+        if(roles != null){
+          if (roles[0]?.roleName==='User')
+          this.router.navigate(['/home'])
+          else if (roles[0]?.roleName==='Admin')
+          this.router.navigate(['/admin'])
+        }
+        
   }
 
   login(loginForm:NgForm){
@@ -72,5 +77,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/forgetPassword'])
       }
 
-  
+      redirectToSignUp(){
+        this.router.navigate(['/signup'])
+      }
 }

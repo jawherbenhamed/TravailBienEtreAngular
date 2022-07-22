@@ -4,7 +4,7 @@
     <div class="alert alert-success" role="alert" *ngIf="notif">
         Profile updated successfully
       </div>
-    <form method="post">
+    <form (ngSubmit)="onSave()" ngNativeValidate>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -35,8 +35,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" (click)='onEdit()' *ngIf="!editing"/>
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save Profile" (click)='onSave()' *ngIf="editing"/>
+                <input type="button" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" (click)='onEdit()' *ngIf="!editing"/>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save Profile" *ngIf="editing"/>
             </div>
         </div>
         <div class="row">
@@ -56,7 +56,8 @@
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade show active form" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Username</label>
@@ -72,8 +73,8 @@
                                     <div class="col-md-6">
                                         <p *ngIf="!editing">{{firstName +" "+ lastName}}</p>
                                         <div *ngIf="editing" class="inputs" #inputs>
-                                            <input type="text" name="firstName" [(ngModel)]="firstName">
-                                            <input type="text" name="lastName" [(ngModel)]="lastName">
+                                            <input type="text" name="firstName" [(ngModel)]="firstName" required>
+                                            <input type="text" name="lastName" [(ngModel)]="lastName" required>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +84,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p *ngIf="!editing">{{email}}</p>
-                                        <input *ngIf="editing" type="text" name="email" [(ngModel)]="email">
+                                        <input *ngIf="editing" type="email" name="email" [(ngModel)]="email" required>
+                                        <!-- <label for="inp" class="inp" *ngIf="editing">
+                                            <input type="text" id="inp" placeholder="&nbsp;" name="email" [(ngModel)]="email">
+                                            <span class="label">Label</span>
+                                            <span class="focus-bg"></span>
+                                          </label> -->
 
                                     </div>
                                 </div>
@@ -93,7 +99,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p *ngIf="!editing">(+216) {{phone}}</p>
-                                        <input *ngIf="editing" type="text" name="phone" [(ngModel)]="phone">
+                                        <input *ngIf="editing" type="tel" name="phone" [(ngModel)]="phone" required  
+                                              pattern="[0-9]{8}"
+                                        >
 
                                     </div>
                                 </div>
@@ -103,7 +111,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p *ngIf="!editing">{{profession}}</p>
-                                        <input *ngIf="editing" type="text" name="profession" [(ngModel)]="profession">
+                                        <input *ngIf="editing" type="text" name="profession" [(ngModel)]="profession"
+                                        required
+                                        >
 
                                     </div>
                                 </div>
