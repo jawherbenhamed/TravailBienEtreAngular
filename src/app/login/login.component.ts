@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,6 +25,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home'])
         else if (roles[0]?.roleName==='Admin')
         this.router.navigate(['/admin'])
+
   }
 
   login(loginForm:NgForm){
@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
 
           if(!response.user.disabled)
           {
-
             this.userAuthService.setToken(response.jwtToken)
             this.userAuthService.setRole(response.user.role)
             this.userAuthService.setUserName(response.user.userName)
@@ -63,17 +62,12 @@ export class LoginComponent implements OnInit {
         console.log("res",error)
         this.notiferror=true
         console.log("notif error",this.notiferror)
-
         setTimeout(() => {
           this.notiferror=false
-        }, 3000);   
-
+        }, 3000); 
       }
     )
-
       }
-    
-
       redirectToForgetPasword(){
         this.router.navigate(['/forgetPassword'])
       }
