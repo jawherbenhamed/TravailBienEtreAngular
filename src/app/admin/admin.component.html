@@ -7,7 +7,8 @@
                 <th>userName</th>
                 <th>LastName</th>
                 <th>FirstName</th>
-                <th>statut</th>
+                <th>last time seen</th>
+                <!-- <th>statut</th> -->
                 <th>Action</th>
             </tr>
         </thead>
@@ -17,7 +18,8 @@
                     <td>{{item.userName | titlecase}}</td>
                     <td>{{item.userLastName | titlecase}}</td>
                     <td>{{item.userFirstName | titlecase}}</td>
-                    <td>{{item.disabled ? "En Attente": "Membre"  | titlecase}}</td>
+                    <td>{{item.lastTimeConnected | dateAsAgo}}  <i [ngClass]="!item.lastTimeConnected ? 'fa-solid fa-circle-exclamation':'fa-solid fa-check'"> </i></td>
+                    <!-- <td>{{item.disabled ? "En Attente": "Membre"  | titlecase}}</td> -->
 
                     <td class="">
                         <button *ngIf="item.disabled" class="btn btn-outline-success" (click)="acceptUser(item.userName)">Approuver</button>

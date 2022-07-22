@@ -114,7 +114,8 @@
                                         <label>Last time connected</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{user?.lastTimeConnected |  date:'long'}}</p>
+                                        <p>{{user?.lastTimeConnected |  date:'long'}} {{user?.lastTimeConnected |  dateAsAgo}}</p>
+                                        
                                     </div>
                                 </div>
                                 <div class="row">

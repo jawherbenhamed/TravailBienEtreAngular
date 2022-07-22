@@ -19,6 +19,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProfilComponent } from './profil/profil.component';
     ChatComponent,
     ForgetPasswordComponent,
     ChangePasswordComponent,
-    ProfilComponent
+    ProfilComponent,
+    DateAsAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { ProfilComponent } from './profil/profil.component';
     },
     UserService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [DateAsAgoPipe]
 })
 export class AppModule { }
