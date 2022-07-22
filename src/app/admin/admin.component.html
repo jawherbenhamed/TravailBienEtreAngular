@@ -1,12 +1,16 @@
-<p>Gestion des utilisateurs</p>
+<div class="container">
 
-    <table class="table table-stripped ">
-        <thead class="thead-dark">
+    
+    <div class="about-details-cap mt-5">
+        <h4>Users Managment</h4>
+
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark" >
             <tr>
                 <th>#</th>
-                <th>userName</th>
-                <th>LastName</th>
-                <th>FirstName</th>
+                <th>username</th>
+                <th>Name</th>
                 <th>last time seen</th>
                 <!-- <th>statut</th> -->
                 <th>Action</th>
@@ -16,18 +20,18 @@
                 <tr *ngFor="let item of usersList$ | async; let i = index">
                     <td>{{i}}</td>
                     <td>{{item.userName | titlecase}}</td>
-                    <td>{{item.userLastName | titlecase}}</td>
-                    <td>{{item.userFirstName | titlecase}}</td>
+                    <td>{{item.userFirstName | titlecase}} {{item.userLastName | titlecase}}</td>
+                  
                     <td>{{item.lastTimeConnected | dateAsAgo}}  <i [ngClass]="!item.lastTimeConnected ? 'fa-solid fa-circle-exclamation':'fa-solid fa-check'"> </i></td>
                     <!-- <td>{{item.disabled ? "En Attente": "Membre"  | titlecase}}</td> -->
 
                     <td class="">
                         <button *ngIf="item.disabled" class="btn btn-outline-success" (click)="acceptUser(item.userName)">Approuver</button>
                         <button *ngIf="item.disabled" class="btn btn-outline-danger" (click)="onClickDelete(item.userName)">Décliner</button>
-
                         <button *ngIf="!item.disabled" class="btn btn-outline-danger" (click)="onClickDelete(item.userName)">Supprimer</button>
                     </td>
 
                 </tr>
         </tbody>
     </table>
+</div>
